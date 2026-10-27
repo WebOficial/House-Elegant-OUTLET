@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6f1728">
+  <title>House Elegant Outlet | Sierra Puertas</title>
+  <style>
+    :root{
+      --wine:#781b2d; --wine-dark:#53111e; --black:#171717;
+      --gray:#6b6b6b; --light:#f4f4f4; --line:#e5e5e5; --white:#fff;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#fff;color:var(--black);font-family:Arial,Helvetica,sans-serif}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    .topline{height:5px;background:var(--wine)}
+    header{background:#fff;border-bottom:1px solid var(--line)}
+    .header-inner{max-width:1200px;margin:auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:13px;min-width:0}
+    .logo-mark{width:142px;height:74px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#050505;border-radius:4px;flex-shrink:0}.logo-mark img{width:100%;height:100%;object-fit:contain;display:block}
+    .brand h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(17px,3vw,26px);line-height:1.08;margin:0;letter-spacing:.4px}
+    .brand .outlet{color:var(--wine);font-weight:800;letter-spacing:2px;font-size:12px;display:block;margin-top:5px}
+    .header-note{font-size:12px;color:var(--gray);text-align:right;line-height:1.5}
+    .hero{background:linear-gradient(115deg,#1a1a1a,#343434);color:#fff}
+    .hero-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;min-height:300px}
+    .hero-copy{padding:42px 28px 42px 20px;align-self:center}
+    .eyebrow{text-transform:uppercase;letter-spacing:2px;color:#e7b9c1;font-size:11px;font-weight:bold}
+    .hero h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(28px,4vw,43px);line-height:1.08;margin:12px 0}
+    .hero p{color:#e1e1e1;max-width:540px;line-height:1.65;font-size:14px}
+    .hero-btn{display:inline-block;background:var(--wine);color:#fff;border:0;border-radius:4px;padding:12px 18px;margin-top:9px;font-weight:bold;text-decoration:none}
+    .store-photo{min-height:260px;background:#dedede;display:flex;align-items:center;justify-content:center;text-align:center;color:#555;padding:24px;position:relative;overflow:hidden}
+    .photo-placeholder{border:2px dashed #999;padding:26px;max-width:290px;background:#ffffffc9;border-radius:8px}
+    .photo-placeholder strong{display:block;margin-bottom:8px}
+    .section{max-width:1200px;margin:auto;padding:34px 20px 100px}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:20px}
+    .section h2{font-family:Georgia,'Times New Roman',serif;font-size:30px;margin:0}
+    .section-head p{color:var(--gray);font-size:13px;margin:8px 0 0}
+    .search{width:min(260px,45%);border:1px solid #d6d6d6;border-radius:5px;padding:11px 12px;outline-color:var(--wine)}
+    .product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}
+    .product{border:1px solid var(--line);border-radius:7px;overflow:hidden;background:#fff;transition:transform .18s,box-shadow .18s;min-width:0}
+    .product:hover{transform:translateY(-3px);box-shadow:0 8px 25px #0000000d}
+    .product-image{height:190px;background:#f0efee;position:relative;display:grid;place-items:center;overflow:hidden}
+    .product-image img{width:100%;height:100%;object-fit:cover;display:block}
+    .placeholder-art{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#f5f5f5,#e5e2e1);color:#777;text-align:center;padding:15px;font-size:13px}
+    .zoom{position:absolute;right:9px;top:9px;width:35px;height:35px;border:0;border-radius:50%;background:#ffffffed;color:#222;box-shadow:0 2px 8px #0002;font-size:20px}
+    .product-info{padding:13px}
+    .product h3{font-size:15px;line-height:1.35;margin:0 0 7px}
+    .product-desc{font-size:12px;color:var(--gray);line-height:1.45;min-height:34px;margin:0 0 12px}
+    .product-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .price{font-weight:800;color:var(--wine);font-size:17px}
+    .add{border:0;background:var(--black);color:#fff;border-radius:4px;padding:9px 11px;font-size:12px;font-weight:bold}
+    .add:hover{background:var(--wine)}
+    .stock{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:#47724d;margin-bottom:7px}
+    .empty{grid-column:1/-1;text-align:center;padding:30px;color:var(--gray)}
+    .cart-bar{position:fixed;z-index:20;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;box-shadow:0 -5px 20px #0000000c;padding:10px 16px}
+    .cart-bar-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px}
+    .cart-summary{display:flex;align-items:center;gap:12px;min-width:0}
+    .cart-icon{width:42px;height:42px;background:var(--wine);color:#fff;border-radius:50%;display:grid;place-items:center;font-size:19px;flex-shrink:0}
+    .cart-summary strong{display:block;font-size:14px}
+    .cart-summary small{display:block;color:var(--gray);margin-top:3px}
+    .cart-total{font-size:17px;font-weight:800;white-space:nowrap}
+    .cart-open{background:var(--wine);color:#fff;border:0;border-radius:5px;padding:12px 18px;font-weight:bold;white-space:nowrap}
+    .overlay{position:fixed;inset:0;background:#0009;z-index:30;display:none;align-items:flex-end;justify-content:center}
+    .overlay.show{display:flex}
+    .drawer{background:#fff;width:min(760px,100%);max-height:92vh;overflow:auto;border-radius:14px 14px 0 0;padding:23px}
+    .drawer-head{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:13px}
+    .drawer-head h2{font-family:Georgia,serif;margin:0;font-size:25px}
+    .close{border:0;background:#eee;border-radius:50%;width:36px;height:36px;font-size:21px}
+    .cart-items{padding:12px 0}
+    .cart-row{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #eee}
+    .cart-thumb{width:64px;height:64px;border-radius:5px;background:#eee;object-fit:cover;display:grid;place-items:center;color:#777;font-size:10px;text-align:center}
+    .cart-row h4{margin:0 0 5px;font-size:14px}
+    .cart-row small{color:var(--gray)}
+    .qty{display:flex;align-items:center;gap:8px;margin-top:8px}
+    .qty button{width:25px;height:25px;border:1px solid #ddd;background:#fff;border-radius:4px}
+    .remove{border:0;background:transparent;color:var(--wine);font-size:12px;margin-left:6px}
+    .cart-empty{text-align:center;padding:22px;color:var(--gray)}
+    .form-section{border-top:1px solid var(--line);padding-top:20px}
+    .form-section h3{margin:0 0 5px;font-size:19px}
+    .form-section>p{font-size:12px;color:var(--gray);margin:0 0 16px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field.full{grid-column:1/-1}
+    .field label{font-size:12px;font-weight:bold}
+    .field input,.field select,.field textarea{width:100%;border:1px solid #d5d5d5;border-radius:5px;padding:11px;outline-color:var(--wine);background:#fff}
+    .field textarea{min-height:70px;resize:vertical}
+    .notice{display:none;background:#fbf0f2;border-left:3px solid var(--wine);padding:11px 12px;font-size:12px;line-height:1.5;margin:13px 0}
+    .notice.show{display:block}
+    .totals{background:#f7f7f7;padding:14px;border-radius:6px;margin:17px 0}
+    .total-line{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:5px 0}
+    .total-line.grand{font-weight:800;font-size:18px;border-top:1px solid #ddd;margin-top:7px;padding-top:12px}
+    .pay-btn{width:100%;background:var(--wine);color:#fff;border:0;border-radius:5px;padding:14px;font-weight:bold}
+    .pay-btn:hover{background:var(--wine-dark)}
+    .foot{background:#f5f5f5;text-align:center;padding:25px 15px;color:#777;font-size:12px;line-height:1.7}
+    .lightbox{position:fixed;inset:0;background:#000e;z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
+    .lightbox.show{display:flex}
+    .lightbox-content{max-width:min(900px,95vw);max-height:85vh;text-align:center;color:#fff}
+    .lightbox-content img{max-width:100%;max-height:75vh;object-fit:contain;border-radius:4px}
+    .lightbox-title{margin-top:10px}
+    .lightbox-close{position:absolute;right:20px;top:18px;border:0;background:#fff;border-radius:50%;width:42px;height:42px;font-size:25px}
+    @media(max-width:900px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.product-image{height:170px}.hero-inner{grid-template-columns:1fr .8fr}}
+    @media(max-width:650px){
+      .header-inner{padding:14px}.logo-mark{width:112px;height:62px}.header-note{display:none}
+      .hero-inner{display:flex;flex-direction:column}.hero-copy{padding:30px 20px}.store-photo{min-height:180px}
+      .section{padding:27px 12px 105px}.section-head{align-items:stretch;flex-direction:column}.search{width:100%}
+      .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-image{height:145px}
+      .product-info{padding:10px}.product h3{font-size:13px}.product-desc{font-size:11px;min-height:44px}.price{font-size:15px}.add{padding:8px;font-size:11px}
+      .cart-bar{padding:9px 10px}.cart-bar-inner{gap:8px}.cart-icon{width:36px;height:36px}.cart-summary strong{font-size:12px}.cart-summary small{font-size:10px}.cart-total{font-size:14px}.cart-open{padding:11px 12px;font-size:12px}
+      .drawer{padding:18px 14px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <!-- Reemplazar este sello temporal por el logo oficial cuando esté disponible -->
+        <div class="logo-mark"><img src="logo-house-elegant.png" alt="Logotipo House Elegant"></div>
+        <div>
+          <h1>HOUSE ELEGANT</h1>
+          <span class="outlet">OUTLET · SIERRA PUERTAS</span>
+        </div>
+      </div>
+      <div class="header-note">ESTILO · CALIDAD · ATENCIÓN PERSONALIZADA<br>Catálogo de productos en stock</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">Bienvenido a nuestra tienda</span>
+        <h2>Tu próximo favorito<br>está aquí.</h2>
+        <p id="storeDescription">En House Elegant Outlet encontrarás productos seleccionados con una atención cercana y personalizada. Explora el catálogo y arma tu pedido desde aquí.</p>
+        <a class="hero-btn" href="#productos">VER PRODUCTOS</a>
+      </div>
+      <div class="store-photo" id="storePhoto">
+        <div class="photo-placeholder">
+          <strong>FOTO DEL LOCAL</strong>
+          Aquí colocaremos la foto real de la tienda cuando la envíes.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="section" id="productos">
+    <div class="section-head">
+      <div>
+        <h2>Productos en stock</h2>
+        <p>Elige tus productos, agrégalos al carrito y coordina tu compra por WhatsApp.</p>
+      </div>
+      <input id="search" class="search" type="search" placeholder="Buscar producto..." aria-label="Buscar producto">
+    </div>
+    <div id="productGrid" class="product-grid"></div>
+  </main>
+
+  <footer class="foot">
+    <strong>HOUSE ELEGANT OUTLET</strong><br>
+    Catálogo en línea · Los pedidos y pagos se coordinan con un vendedor por WhatsApp.<br>
+    <span>Precios y disponibilidad sujetos a confirmación.</span>
+  </footer>
+
+  <!-- Barra del carrito fija: permanece visible al deslizar la página -->
+  <div class="cart-bar">
+    <div class="cart-bar-inner">
+      <div class="cart-summary">
+        <div class="cart-icon">🛒</div>
+        <div><strong>Mi carrito (<span id="cartCount">0</span>)</strong><small id="cartCaption">Todavía no agregas productos</small></div>
+      </div>
+      <div class="cart-total" id="barTotal">S/ 0.00</div>
+      <button class="cart-open" id="openCart">VER CARRITO</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="cartOverlay" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <div class="drawer">
+      <div class="drawer-head">
+        <h2 id="cartTitle">Tu carrito</h2>
+        <button class="close" id="closeCart" aria-label="Cerrar carrito">×</button>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="form-section">
+        <h3>Ingresa tus datos</h3>
+        <p>Completa tus datos para que un vendedor pueda confirmar el pedido, el pago y el recojo o entrega.</p>
+        <form id="checkoutForm">
+          <div class="form-grid">
+            <div class="field full"><label for="customerName">Nombres y apellidos completos *</label><input id="customerName" name="customerName" autocomplete="name" required placeholder="Como aparece en tu documento"></div>
+            <div class="field"><label for="customerDni">DNI *</label><input id="customerDni" name="customerDni" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" required placeholder="8 dígitos"></div>
+            <div class="field"><label for="customerPhone">Celular de contacto *</label><input id="customerPhone" name="customerPhone" inputmode="tel" required placeholder="Tu número de celular"></div>
+            <div class="field full"><label for="paymentMethod">Tipo de pago *</label>
+              <select id="paymentMethod" name="paymentMethod" required>
+                <option value="">Selecciona una opción</option>
+                <option value="Yape o Plin">Yape o Plin</option>
+                <option value="Transferencia bancaria">Transferencia bancaria</option>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Tarjeta">Tarjeta (5% de cargo adicional)</option>
+              </select>
+            </div>
+            <div class="field full"><label for="deliveryMethod">Recojo o entrega *</label>
+              <select id="deliveryMethod" name="deliveryMethod" required>
+                <option value="">Selecciona una opción</option>
+                <option value="Recojo en tienda">Recojo en tienda</option>
+                <option value="Coordinar entrega">Coordinar entrega</option>
+              </select>
+            </div>
+            <div class="field full"><label for="customerNotes">Comentario adicional (opcional)</label><textarea id="customerNotes" name="customerNotes" placeholder="Dirección de entrega, horario u otra indicación"></textarea></div>
+          </div>
+          <div id="cardNotice" class="notice">El pago con tarjeta tiene un cargo adicional del 5%. El vendedor confirmará el monto final y coordinará contigo el método de pago. No ingreses datos de tarjeta en esta página.</div>
+          <div class="totals">
+            <div class="total-line"><span>Subtotal</span><strong id="subtotal">S/ 0.00</strong></div>
+            <div class="total-line" id="feeLine" style="display:none"><span>Recargo tarjeta (5%)</span><strong id="fee">S/ 0.00</strong></div>
+            <div class="total-line grand"><span>Total estimado</span><strong id="grandTotal">S/ 0.00</strong></div>
+          </div>
+          <div id="checkoutNotice" class="notice"></div>
+          <button class="pay-btn" type="submit">CONTINUAR Y COORDINAR PAGO</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada del producto">
+    <button class="lightbox-close" id="closeLightbox" aria-label="Cerrar imagen">×</button>
+    <div class="lightbox-content"><img id="lightboxImage" alt=""><div id="lightboxTitle" class="lightbox-title"></div></div>
+  </div>
+
+  <script>
+    /*
+      CONFIGURACIÓN PENDIENTE:
+      1. Agrega el logo y la foto del local cuando estén disponibles.
+      2. Completa SELLER_NUMBERS con los dos números en formato internacional,
+         solo dígitos y con código de país. Para Perú, normalmente empieza por 51.
+      3. Cambia los nombres, precios, descripciones e imágenes de PRODUCTS.
+      4. Los productos usan imágenes de ejemplo vacías hasta que se carguen las fotos reales.
+    */
+    const SELLER_NUMBERS = []; // Ejemplo de formato: ['519XXXXXXXX', '519YYYYYYYY']
+
+    const PRODUCTS = Array.from({length:20}, (_,i) => ({
+      id:i+1,
+      name:`Producto de ejemplo ${String(i+1).padStart(2,'0')}`,
+      description:'Añade aquí una descripción breve del producto y sus características.',
+      price: (i+1)*10,
+      image:'', // Ejemplo: 'imagenes/producto-01.jpg'
+      stock:true
+    }));
+
+    const cart = new Map();
+    const grid = document.getElementById('productGrid');
+    const money = value => new Intl.NumberFormat('es-PE',{style:'currency',currency:'PEN'}).format(value);
+    const getProduct = id => PRODUCTS.find(p=>p.id===Number(id));
+    const safe = value => String(value).replace(/[&<>"']/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+
+    function renderProducts(filter=''){
+      const term=filter.trim().toLowerCase();
+      const list=PRODUCTS.filter(p=>(p.name+' '+p.description).toLowerCase().includes(term));
+      if(!list.length){grid.innerHTML='<div class="empty">No encontramos productos con esa búsqueda.</div>';return;}
+      grid.innerHTML=list.map(p=>`
+        <article class="product">
+          <div class="product-image">
+            ${p.image ? `<img src="${safe(p.image)}" alt="${safe(p.name)}" loading="lazy">` : `<div class="placeholder-art">FOTO DEL PRODUCTO<br><small>Ejemplo ${String(p.id).padStart(2,'0')}</small></div>`}
+            <button class="zoom" type="button" data-zoom="${p.id}" aria-label="Ampliar imagen de ${safe(p.name)}" title="Ampliar imagen">⌕</button>
+          </div>
+          <div class="product-info">
+            <div class="stock">${p.stock?'● En stock':'Agotado'}</div>
+            <h3>${safe(p.name)}</h3>
+            <p class="product-desc">${safe(p.description)}</p>
+            <div class="product-bottom"><span class="price">${money(p.price)}</span>
+              <button class="add" type="button" data-add="${p.id}" ${p.stock?'':'disabled'}>${p.stock?'＋ AGREGAR':'AGOTADO'}</button>
+            </div>
+          </div>
+        </article>`).join('');
+    }
+
+    function addToCart(id){const p=getProduct(id);if(!p||!p.stock)return;cart.set(p.id,(cart.get(p.id)||0)+1);renderCartSummary();}
+    function changeQty(id,delta){const next=(cart.get(Number(id))||0)+delta;if(next<=0)cart.delete(Number(id));else cart.set(Number(id),next);renderCartSummary();renderCartItems();}
+    function removeItem(id){cart.delete(Number(id));renderCartSummary();renderCartItems();}
+    function subtotalValue(){let total=0;cart.forEach((qty,id)=>{const p=getProduct(id);if(p)total+=p.price*qty;});return total;}
+    function itemCount(){let count=0;cart.forEach(q=>count+=q);return count;}
+    function renderCartSummary(){
+      const count=itemCount(),subtotal=subtotalValue();
+      document.getElementById('cartCount').textContent=count;
+      document.getElementById('cartCaption').textContent=count?`${count} unidad(es) en tu pedido`:'Todavía no agregas productos';
+      document.getElementById('barTotal').textContent=money(subtotal);
+      document.getElementById('subtotal').textContent=money(subtotal);
+      updateTotals();
+    }
+    function renderCartItems(){
+      const container=document.getElementById('cartItems');
+      if(!cart.size){container.innerHTML='<div class="cart-empty">Tu carrito está vacío. Cierra esta ventana y agrega productos del catálogo.</div>';renderCartSummary();return;}
+      container.innerHTML=[...cart.entries()].map(([id,qty])=>{
+        const p=getProduct(id);if(!p)return '';
+        const thumb=p.image?`<img class="cart-thumb" src="${safe(p.image)}" alt="">`:`<div class="cart-thumb">FOTO</div>`;
+        return `<div class="cart-row">${thumb}<div><h4>${safe(p.name)}</h4><small>${money(p.price)} c/u · ${money(p.price*qty)}</small><div class="qty"><button type="button" data-qty="-1" data-id="${id}" aria-label="Reducir cantidad">−</button><strong>${qty}</strong><button type="button" data-qty="1" data-id="${id}" aria-label="Aumentar cantidad">+</button><button class="remove" type="button" data-remove="${id}">Quitar</button></div></div><strong>${money(p.price*qty)}</strong></div>`;
+      }).join('');
+      renderCartSummary();
+    }
+    function updateTotals(){
+      const sub=subtotalValue(),card=document.getElementById('paymentMethod').value==='Tarjeta',fee=card?sub*.05:0;
+      document.getElementById('feeLine').style.display=card?'flex':'none';
+      document.getElementById('fee').textContent=money(fee);
+      document.getElementById('grandTotal').textContent=money(sub+fee);
+      document.getElementById('cardNotice').classList.toggle('show',card);
+    }
+    function showCart(){document.getElementById('cartOverlay').classList.add('show');renderCartItems();document.body.style.overflow='hidden';}
+    function hideCart(){document.getElementById('cartOverlay').classList.remove('show');document.body.style.overflow='';}
+    function openZoom(id){
+      const p=getProduct(id);if(!p)return;
+      const img=document.getElementById('lightboxImage');
+      if(p.image){img.src=p.image;img.style.display='block';}
+      else {img.removeAttribute('src');img.style.display='none';}
+      document.getElementById('lightboxTitle').textContent=p.name+(p.image?'': ' · La foto real se agregará al catálogo.');
+      document.getElementById('lightbox').classList.add('show');
+    }
+
+    grid.addEventListener('click',e=>{
+      const add=e.target.closest('[data-add]'),zoom=e.target.closest('[data-zoom]');
+      if(add){addToCart(add.dataset.add);add.textContent='✓ AGREGADO';setTimeout(()=>{if(add.isConnected)add.textContent='＋ AGREGAR';},900);}
+      if(zoom)openZoom(zoom.dataset.zoom);
+    });
+    document.getElementById('search').addEventListener('input',e=>renderProducts(e.target.value));
+    document.getElementById('openCart').addEventListener('click',showCart);
+    document.getElementById('closeCart').addEventListener('click',hideCart);
+    document.getElementById('cartOverlay').addEventListener('click',e=>{if(e.target.id==='cartOverlay')hideCart();});
+    document.getElementById('cartItems').addEventListener('click',e=>{
+      const qty=e.target.closest('[data-qty]'),remove=e.target.closest('[data-remove]');
+      if(qty)changeQty(qty.dataset.id,Number(qty.dataset.qty));
+      if(remove)removeItem(remove.dataset.remove);
+    });
+    document.getElementById('paymentMethod').addEventListener('change',updateTotals);
+    document.getElementById('closeLightbox').addEventListener('click',()=>document.getElementById('lightbox').classList.remove('show'));
+    document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')e.currentTarget.classList.remove('show');});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){hideCart();document.getElementById('lightbox').classList.remove('show');}});
+
+    document.getElementById('checkoutForm').addEventListener('submit',e=>{
+      e.preventDefault();
+      const notice=document.getElementById('checkoutNotice');
+      notice.classList.remove('show');
+      if(!cart.size){notice.textContent='Agrega al menos un producto antes de continuar.';notice.classList.add('show');return;}
+      const form=e.currentTarget;
+      if(!form.reportValidity())return;
+      if(SELLER_NUMBERS.length<2 || SELLER_NUMBERS.some(n=>!/^51\d{9}$/.test(n))){
+        notice.textContent='La tienda todavía debe configurar los dos números de WhatsApp de sus vendedores. Tu pedido no se ha enviado. Cuando se agreguen los números, esta opción abrirá WhatsApp con un vendedor elegido aleatoriamente.';
+        notice.classList.add('show');return;
+      }
+      const data=new FormData(form);
+      const sub=subtotalValue(),isCard=data.get('paymentMethod')==='Tarjeta',fee=isCard?sub*.05:0;
+      const lines=[...cart.entries()].map(([id,qty])=>{const p=getProduct(id);return `• ${p.name} x${qty} — ${money(p.price*qty)}`;});
+      const message=[
+        '🛍️ *NUEVO PEDIDO — HOUSE ELEGANT OUTLET*','',
+        '*Productos:*',...lines,'',
+        `*Subtotal:* ${money(sub)}`,
+        ...(isCard?[`*Recargo tarjeta (5%):* ${money(fee)}`]:[]),
+        `*TOTAL ESTIMADO:* ${money(sub+fee)}`,'',
+        '*Datos del cliente:*',
+        `Nombre: ${data.get('customerName')}`,
+        `DNI: ${data.get('customerDni')}`,
+        `Celular: ${data.get('customerPhone')}`,
+        `Tipo de pago: ${data.get('paymentMethod')}`,
+        `Recojo/entrega: ${data.get('deliveryMethod')}`,
+        `Comentario: ${data.get('customerNotes')||'Sin comentario'}`,'',
+        'Solicito confirmar disponibilidad, pago y recojo/entrega. Gracias.'
+      ].join('\n');
+      const number=SELLER_NUMBERS[Math.floor(Math.random()*SELLER_NUMBERS.length)];
+      alert('Te vamos a dirigir a WhatsApp para que un vendedor coordine el pago y el recojo o la entrega. El pago se concreta directamente con el vendedor.');
+      window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`,'_blank','noopener');
+    });
+
+    renderProducts();
+    renderCartSummary();
+  </script>
+</body>
+</html>
